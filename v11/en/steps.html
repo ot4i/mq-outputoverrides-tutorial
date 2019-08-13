@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+ 
+	
+<!-- header::Start -->
+	<head>
+		<!-- Use Internet Explorer 9 Standards mode for Eclipse Browser Control - https://www.eclipse.org/swt/faq.php#browsernativeie and https://msdn.microsoft.com/en-us/library/jj676915%28v=vs.85%29.aspx -->
+  		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		
+		<!-- Next 2 http=equiv headers required to disable caching the Eclipse Browser Widget -->
+		<meta http-equiv="Pragma" content="no-cache">
+  		<meta http-equiv="Expires" content="-1">
+
+		<meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<meta name="copyright" content="Copyright IBM Corporation 2014" />
+		<meta name="abstract" content="IBM App Connect Enterprise V11 Tutorial">
+		<meta name="author" content="IBM">
+		<meta name="description" content="IBM App Connect Enterprise V11 Tutorial">
+		<meta name="keywords" content="keywords" > 
+		<meta name="robots" content="index,follow">
+		<meta name="source" content="IBM App Connect Enterprise V11 Tutorial" /> 
+		
+		<title>IBM App Connect Enterprise V11 Tutorial</title>
+
+    	<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/main.css" />
+		<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/app.css" />
+    	
+		<script src="https://ot4i.github.io/iib-tutorials/js/json2.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/js2java.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/js2java_steps.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/modernizr.js"></script>
+	</head>
+<!-- header::End -->
+<!-- body::Start -->
+		<body>
+  	<!-- body content here -->
+	<div class="row">
+	  <div class="small-12 medium-12 large-12 columns">
+	    <p> </p>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="small-9 medium-9 large-9 columns">
+	    <h4 class="title">MQ - Using the LocalEnvironment and MQEndpoint Policy to override MQOutput configuration <action><button class="small radius button" tabindex="0" id="stepsViewDetails" onclick="viewDetails()"> View Details</button> </action></h4>
+	  </div>
+	  <div class="small-3 medium-3 large-3 columns">
+		<a href="javascript:;" onclick="openHelpSystem('/com.ibm.etools.msgbroker.helphome.doc/help_home_msgbroker.htm')" class="small right helplink">IBM Knowledge Center</a> 
+	  </div>
+	</div> 
+	<hr>
+	<div class="row">
+		<div class="small-10 medium-10 large-10 columns">
+		<h5> Learn how to use the LocalEnvironment tree to dynamically configure the output queue written to by the MQOutput node and how to use an MQEndpoint Policy to override its queue manager connection. </h5>
+		</div>
+		<div class="small-2 medium-2 large-2 columns">
+			<button class="small radius button right" tabindex="0" id="backToGallery" onclick="backToGallery()"> Back To Gallery
+			</button>
+		</div>
+	</div>
+	<div class="row">          
+		  <div class="small-12 medium-12 large-12 columns">
+			<ul class="tabs vertical"> 
+				<li class="tab-title tab-title-small active">
+				  <a href="javascript:;" onclick="show('panel21')">Create</a> 
+				</li>
+				<li class="tab-title tab-title-small">
+				  <a href="javascript:;" onclick="show('panel31')">Prepare</a> 
+				</li>
+				<li class="tab-title tab-title-small">
+				  <a href="javascript:;" onclick="show('panel41')">Run</a> 
+				</li>
+			</ul>
+			<!-- editing -->
+			<div class="tabs-content panel-thin-blue vertical"> 
+		    	<div class="content active" id="panel21">
+		    		
+		    		<div class="small-10 medium-10 large-10 columns divider">
+					
+				      	<div class="row content-details">
+					      	<h4>Import projects</h4>
+					        
+						    
+								<p> When you click Import, two projects will be created in your workspace: An application named <span class="application">ExampleMQOutput</span> and a policy project named <span class="application">MyExamplePolicies</span>. </p>
+								
+							
+								<p> <span class="application">ExampleMQOutput</span> provides a single message flow named <span class="resource">MQOutput</span>. The <span class="resource">MQOutput</span> message flow is driven by an HTTPInput node configured to receive a simple JSON input message. The HTTPInput echoes the message to an HTTPReply, but also drives an HTTPHeader node to remove the HTTP Input header and then invoke a Mapping node. The Mapping node configures the LocalEnvironment tree at <code>LocalEnvironment.Destination.MQ.DestinationData.queueName</code> with the name of a desired output queue. After an MQHeader node, which creates the MQMD header, an MQOutput node is configured to distribute the message based upon the queue name in the LocalEnvironment, courtesy of the setting on the <span class="resource">Advanced</span> tab which specifies <code>Destination Mode = Destination List</code>. Note that on the <span class="resource">Basic</span> tab the property <code>Queue name = NOT_USED</code> will be ignored because of the other property settings just discussed. </p>
+								
+							
+								<p> The Policy Project <span class="application">MyExamplePolicies</span> provides a single policy named <span class="resource">MyMQPolicy.policyxml</span> which is configured with a different queue manager: <code>Queue manager name = TESTQM2</code>. This policy is used by the second part of the tutorial where the flow settings are overidden using a second BAR file which also carries this policy project. </p>
+								
+							
+								<p> Once imported using the link on the right, the application <span class="application">ExampleMQOutput</span> is ready to be deployed and tested. To deploy, two separate BAR files are provided: <span class="resource">MQOutputDeploy1.bar</span> and <span class="resource">MQOutputDeploy2.bar</span>. When to use each of these BAR files, is described on the Prepare tab. </p>
+								
+							
+						</div>
+						
+						<div class="row content-details">
+							<h4>Find out more</h4>
+							<ul>
+							
+								
+																
+								<li> <a href="javascript:;" onclick="openHelpSystem('/com.ibm.etools.mft.doc/bi12002_.htm')" title="Knowledge Center link to Developing integration solutions by using applications">Developing integration solutions by using applications</a> </li>
+							   	
+							
+							</ul>
+						</div>
+						
+					</div>
+					
+					<div class="small-2 medium-2 large-2 columns">
+					
+					
+					<h4 class="tkaction"><a href="javascript:;" onclick="importArtifacts(); openResource('MainFlow')"> Import <img class="icon-image" src="https://ot4i.github.io/iib-tutorials/images/icons/ibmdesign/back-right-previous_128-orange.png"></a></h4>
+										
+				    </div>
+					
+		    	</div>
+		    	<div class="content" id="panel31">
+					
+					<div class="small-12 medium-12 large-12 columns">
+					
+						<div class="row content-details">
+						  	<h4>Prepare two queue managers and an integration node, and then deploy the message flows</h4>
+						    
+						    
+								<p> The tutorial requires two MQ queue managers, each with the definition of a queue named OUTPUT.  Execute the following steps to prepare your environment accordingly: </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Create an IBM MQ queue manager and configure it by completing the following steps:
+										
+										
+											
+											<ol>
+											
+												
+													<li> Open the IBM App Connect Enterprise Console. If you don't already have one, create and start a queue manager:<br><code><span class="cmdname">crtmqm</span> <span class="varname">TESTQM</span></code><br><code><span class="cmdname">strmqm</span> <span class="varname">TESTQM</span></code></li>
+												
+													<li> Next create a queue by typing the following commands:<br><code>runmqsc <span class="varname">TESTQM</span></code><br><code>define ql(OUTPUT)</code></li>
+												
+													<li> Create and start a second queue manager:<br><code><span class="cmdname">crtmqm</span> <span class="varname">TESTQM2</span></code><br><code><span class="cmdname">strmqm</span> <span class="varname">TESTQM2</span></code></li>
+												
+													<li> Create a queue of the same name on this second queue manager by typing the following commands:<br><code>runmqsc <span class="varname">TESTQM2</span></code><br><code>define ql(OUTPUT)</code></li>
+												
+											
+											</ol>
+											
+										
+										</li>
+									
+										<li> Create an integration node which is associated with the first queue manager you created above by completing the following steps:
+										
+										
+											
+											<ol>
+											
+												
+													<li> In the console window, create an integration node by typing the following command:<br><code><span class="cmdname">mqsicreatebroker</span> <span class="varname">TESTNODE</span> -q <span class="varname">TESTQM</span></code></li>
+												
+													<li> Start the integration node by typing the following command:<br><code><span class="cmdname">mqsistart</span> <span class="varname">TESTNODE</span></code></li>
+												
+													<li> Create an integration server associated with the integration node by typing the following command:<br><code><span class="cmdname">mqsicreateexecutiongroup</span> <span class="varname">TESTNODE</span> -e <span class="varname">default</span></code></li>
+												
+											
+											</ol>
+											
+										
+										</li>
+									
+										<li> Back in the Toolkit, drag and drop deploy the provided BAR file named <span class="application">MQOutputDeploy1.bar</span> which you will find inside the <span class="application">ExampleMQOutput</span> application.
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+						</div>
+						
+						<div class="row content-details">
+							<h4></h4>
+							<ul>
+							
+							</ul>
+						</div>
+							
+					</div>
+					
+		    	</div>
+		    	<div class="content" id="panel41">
+		    		
+					<div class="small-12 medium-12 large-12 columns">
+					
+				    	<div class="row content-details">
+					      	<h4></h4>
+					        
+						    
+								<p> <h4>Use the Flow Exerciser to test the tutorial scenario </h4></p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Open <span class="resource">MQOutput.msgflow</span>.
+										
+										
+											
+											<ul>
+											
+												
+													<li> Click the Flow Exerciser icon <img src="http://ot4i.github.io/ot4i.tutorials//dist/images/icons/iib/startFlowExerciser.png" alt> to start testing the flow (when challenged you do not need to redeploy the flow again).</li>
+												
+													<li> Click the Send Message icon <img src="http://ot4i.github.io/ot4i.tutorials/dist/images/icons/iib/sendMessage.png" alt>.</li>
+												
+													<li> A saved input message is provided named <span class="resource">InputMessage</span> which contains this data:<br><span class="resource">{"Message":"Hello World"}</span><br>Select this input message and click Send and your message is sent to the HTTPInput node. Close the dialog and a green line is shown plotting the path of the message. You can click on the wires to inspect what the message looked like as it travelled through the flow. When you are finished return the flow to edit mode.</li>
+												
+													<li> The MQOutput node should have written a message to the queue OUTPUT on queue manager TESTQM.  You can check the queue depth using these commands:<br><code>runmqsc <span class="varname">TESTQM</span></code><br><code>dis ql(OUTPUT) CURDEPTH</code><br>You can also read the message from the queue like this:<br><code>amqsget OUTPUT TESTQM</code><br><code>Sample AMQSGET0 start</code><br><code>message &lt;{"Message":"Hello World"}&gt;</code></li>
+												
+													<li> Back in the Toolkit, drag and drop deploy the second provided BAR file named <span class="application">MQOutputDeploy2.bar</span> which you will find inside the <span class="application">ExampleMQOutput</span> application. Note that in this BAR file, the message flow's MQOutput node has an override property which has been set: <code>Policy = {MyExamplePolicies}:MyMQPolicy</code>  (IMPORTANT WARNING! Be careful not to accidentally remove this override if you choose to rebuild the BAR file!)</li>
+												
+													<li> Repeat the same test, and you should find that this time, the message is written to the queue OUTPUT on queue manager TESTQM2 instead of queue manager TESTQM.</li>
+												
+											
+											</ul>
+											
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> This tutorial has shown how to use the LocalEnvironment tree to dynamically configure the output queue written to by the MQOutput node and also how to use an MQEndpoint Policy to override its queue manager connection. </p>
+								
+							
+						</div>
+						
+						<div class="row content-details"> 	
+							<h4>Find out more</h4>
+							<ul>
+							
+								
+																
+								<li> <a href="javascript:;" onclick="openHelpSystem('/com.ibm.etools.mft.doc/ac04570_.htm')" title="Knowledge Center link to MQOutput node">MQOutput node</a> </li>
+							   	
+							
+								
+																
+								<li> <a href="javascript:;" onclick="openHelpSystem('/com.ibm.etools.mft.doc/rt26110_.htm')" title="Knowledge Center link to Testing your message flow by using the Flow exerciser">Testing your message flow by using the Flow exerciser</a> </li>
+							   	
+							
+							</ul>
+						</div>
+							
+					</div>
+					
+				</div>	
+			</div> <!-- tab-content -->
+		</div> <!-- columns -->
+	  </div> <!-- row --></body>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/jquery.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/foundation.min.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/main.js"></script>
+	</body>
+<!-- body::End -->
+
+</html>
