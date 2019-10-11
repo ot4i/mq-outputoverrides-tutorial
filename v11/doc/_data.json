@@ -247,8 +247,11 @@
                                             "details": "The MQOutput node should have written a message to the queue OUTPUT on queue manager TESTQM.  You can check the queue depth using these commands:<br><code>runmqsc <span class='varname'>TESTQM</span></code><br><code>dis ql(OUTPUT) CURDEPTH</code><br>You can also read the message from the queue like this:<br><code>amqsget OUTPUT TESTQM</code><br><code>Sample AMQSGET0 start</code><br><code>message &lt;{\"Message\":\"Hello World\"}&gt;</code>"										
                                         },										
 										{
-						   					"details":"Back in the Toolkit, drag and drop deploy the second provided BAR file named <span class='application'>MQOutputDeploy2.bar</span> which you will find inside the <span class='application'>ExampleMQOutput</span> application. Note that in this BAR file, the message flow's MQOutput node has an override property which has been set: <code>Policy = {MyExamplePolicies}:MyMQPolicy</code>  (IMPORTANT WARNING! Be careful not to accidentally remove this override if you choose to rebuild the BAR file!)"
-                    					},			
+											"details": "Back in the Toolkit, we will now use another method of overriding configuration. Look inside the <span class='application'>ExampleMQOutput</span> application to locate a second provided BAR file named <span class='application'>MQOutputDeploy2.bar</span>. Open the BAR file, and look at the Manage tab. You will see it contains both the <span class='application'>ExampleMQOutput</span> application and also a policy named <span class='application'>MyMQPolicy</span>. Expand the application and message flow:  <span class='application'>ExampleMQOutput / MQOutput.msgflow / MQOutput</span>. With the message flow node named <span class='application'>MQOutput</span> selected, look at the properties and you should see that the Policy property has been overriden."
+										},
+										{
+											"details": "Drag and drop deploy <span class='application'>MQOutputDeploy2.bar</span>. As discussed above, in this BAR file the message flow's MQOutput node has an override property which has been set: <code>Policy = {MyExamplePolicies}:MyMQPolicy</code>  (IMPORTANT WARNING! Be careful not to accidentally remove this override if you choose to rebuild the BAR file!)"
+										},
 										{
                                             "details": "Repeat the same test, and you should find that this time, the message is written to the queue OUTPUT on queue manager TESTQM2 instead of queue manager TESTQM."										
 										}
