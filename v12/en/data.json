@@ -68,7 +68,7 @@
             "summary": 
 			{
                 "overviewName": "OVERVIEW",
-                "_overviewComment": "A short description of what happens in this tutorial, and an optional short explanation of the ACE concepts used in this tutorial if necessary for context. What background knowledge must the user have for this to make sense?",
+                "_overviewComment": "A short description of what happens in this tutorial, and an optional short explanation of the concepts used in this tutorial if necessary for context. What background knowledge must the user have for this to make sense?",
                 "sections": 
 				[
                     {
@@ -81,7 +81,7 @@
                         "section": "The tutorial also provides an MQEndpoint Policy in a Policy Project which is used to specify the connection information to another queue manager. After testing the initial flow, the tutorial redeploys the flow using a BAR file which contains an override setting which associates the flow with the MQEndpoint Policy."
                     },					
                     {
-                        "section": "The tutorial requires an ACE integration node owned server, or a standalone server."
+                        "section": "The tutorial requires an integration node owned server, or a standalone server."
                     },
                     {
                         "section": "In IBM App Connect Enterprise, an application is a container for all the resources that are required to create a solution. This tutorial provides an application to hold the message flow. This scenario uses an MQOutput node which is configured to interact with a local queue manager. The flows expect to be deployed to an integration node associated with a local queue manager. There are no other pre-requisites needed by the scenario."
